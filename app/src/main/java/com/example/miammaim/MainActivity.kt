@@ -3,6 +3,9 @@ package com.example.miammaim
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.example.miammaim.adapter.CategoriesAdapter
 import com.example.miammaim.model.CategoriesResponse
 import com.google.gson.Gson
 import okhttp3.*
@@ -11,11 +14,16 @@ import java.net.URL
 
 class MainActivity : AppCompatActivity() {
 
+    private lateinit var recyclerView: RecyclerView
+    private lateinit var categoriesAdapter: CategoriesAdapter
+
     private var categoriesResponse: CategoriesResponse? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        recyclerView = findViewById(R.id.recycler_view)
         getCategories()
     }
 
@@ -28,11 +36,19 @@ class MainActivity : AppCompatActivity() {
         var client = OkHttpClient()
 
         var response = client.newCall(request).enqueue(object : Callback {
-
             override fun onResponse(call: Call, response: Response) {
                 response.body?.string()?.let {
                     categoriesResponse = parseCategoriesResponse(it)
-                    Log.d("OKHTTP", it)
+                    categoriesResponse?.categories?.let { it1 ->
+                        runOnUiThread {
+                            categoriesAdapter = CategoriesAdapter(it1)
+                            Log.d("OKHTTP", "TEST")
+                            recyclerView.adapter = categoriesAdapter
+                            recyclerView.layoutManager = LinearLayoutManager(applicationContext)
+                        }
+
+                    }
+                    Log.d("OKHTTP", "Got " + categoriesResponse?.categories?.count() + " results")
                 }
             }
 
