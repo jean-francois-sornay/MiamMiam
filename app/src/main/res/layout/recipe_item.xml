@@ -5,8 +5,6 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:cardBackgroundColor="@color/secondary"
-        android:background="@color/secondary"
         android:layout_gravity="center"
         android:layout_marginBottom="8dp"
         android:layout_marginLeft="4dp"
@@ -14,16 +12,11 @@
         app:cardCornerRadius="8dp"
         app:cardElevation="8dp">
 
-        <!--on below line we are creating a
-            linear layout for grid view item-->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:background="@color/secondary">
+            android:orientation="vertical">
 
-            <!--on below line we are creating
-                a simple image view-->
             <ImageView
                 android:id="@+id/recipe_item_img"
                 android:layout_width="match_parent"
@@ -32,8 +25,6 @@
                 android:layout_margin="0dp"
                 android:padding="0dp"/>
 
-            <!--on below line we are creating
-                a simple text view-->
             <TextView
                 android:id="@+id/recipe_item_name"
                 android:layout_width="match_parent"
@@ -43,7 +34,6 @@
                 android:padding="4dp"
                 android:text="@string/app_name"
                 android:textAlignment="center"
-                android:textColor="@color/text_primary"
                 android:textStyle="bold"
                 tools:ignore="RtlCompat" />
 
