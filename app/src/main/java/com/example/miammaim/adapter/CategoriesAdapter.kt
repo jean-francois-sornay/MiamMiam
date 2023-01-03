@@ -10,7 +10,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.miammaim.MainActivity
 import com.example.miammaim.R
-//import com.example.miammaim.RecipiesActivity
+import com.example.miammaim.RecipiesActivity
 import com.example.miammaim.model.Categorie
 import com.squareup.picasso.Picasso
 
@@ -37,9 +37,9 @@ class CategoriesAdapter(val categories: List<Categorie>) : RecyclerView.Adapter<
                 holder.itemView.animate().scaleX(1f).scaleY(1f).setDuration(200)
             }
             // open a new activity with the list of recipies of the category
-            //val intent = Intent(holder.itemView.context, RecipiesActivity::class.java)
-            //intent.putExtra("categoryName", categories[position].name)
-            //holder.itemView.context.startActivity(intent)
+            val intent = Intent(holder.itemView.context, RecipiesActivity::class.java)
+            intent.putExtra("categoryName", categories[position].name)
+            holder.itemView.context.startActivity(intent)
         })
 
     }
