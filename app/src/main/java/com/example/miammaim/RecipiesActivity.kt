@@ -2,11 +2,14 @@ package com.example.miammaim
 
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.miammaim.adapter.RecipiesAdapter
 import com.example.miammaim.model.RecipiesResponse
+import com.google.android.material.progressindicator.CircularProgressIndicator
+import com.google.android.material.snackbar.Snackbar
 import com.google.gson.Gson
 import okhttp3.*
 import java.io.IOException
@@ -15,6 +18,7 @@ import java.net.URL
 class RecipiesActivity : AppCompatActivity() {
     private lateinit var recyclerView: RecyclerView
     private lateinit var recipiesAdapter: RecipiesAdapter
+    private lateinit var recipiesProgressIndicator: CircularProgressIndicator
 
     private var recipiesResponse: RecipiesResponse? = null
     private var categoryName: String? = null
@@ -22,7 +26,9 @@ class RecipiesActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_recipies)
+        recipiesProgressIndicator = findViewById(R.id.recipies_circular_progress)
 
+        recipiesProgressIndicator.visibility = View.VISIBLE
         val bundle = intent.extras
         categoryName = bundle!!.getString("categoryName")
 
@@ -46,6 +52,7 @@ class RecipiesActivity : AppCompatActivity() {
                     recipiesResponse = parseRecipiesResponse(it)
                     recipiesResponse?.recipies?.let { it1 ->
                         runOnUiThread {
+                            recipiesProgressIndicator.visibility = View.GONE
                             recipiesAdapter = RecipiesAdapter(it1)
                             recyclerView.adapter = recipiesAdapter
                         }
@@ -57,6 +64,10 @@ class RecipiesActivity : AppCompatActivity() {
 
             override fun onFailure(call: Call, e: IOException) {
                 e.localizedMessage?.let { Log.e("OKHTTP Recipies", it) }
+                recipiesProgressIndicator.visibility = View.VISIBLE
+                Snackbar.make(recyclerView,
+                    "Unable to load the recipies of $categoryName category, check your internet connection", Snackbar.LENGTH_LONG)
+                    .show()
             }
         })
     }
