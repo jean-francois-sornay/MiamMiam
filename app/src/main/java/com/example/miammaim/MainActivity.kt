@@ -3,10 +3,13 @@ package com.example.miammaim
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.miammaim.adapter.CategoriesAdapter
 import com.example.miammaim.model.CategoriesResponse
+import com.google.android.material.progressindicator.CircularProgressIndicator
+import com.google.android.material.snackbar.Snackbar
 import com.google.gson.Gson
 import okhttp3.*
 import java.io.IOException
@@ -16,6 +19,7 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var recyclerView: RecyclerView
     private lateinit var categoriesAdapter: CategoriesAdapter
+    private lateinit var categoriesProgressIndicator: CircularProgressIndicator
 
     private var categoriesResponse: CategoriesResponse? = null
 
@@ -23,6 +27,10 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         recyclerView = findViewById(R.id.categories_recycler_view)
+        categoriesProgressIndicator = findViewById(R.id.categories_circular_progress)
+
+        categoriesProgressIndicator.visibility = View.VISIBLE;
+
         getCategories()
     }
 
@@ -40,6 +48,7 @@ class MainActivity : AppCompatActivity() {
                     categoriesResponse = parseCategoriesResponse(it)
                     categoriesResponse?.categories?.let { it1 ->
                         runOnUiThread {
+                            categoriesProgressIndicator.visibility = View.GONE
                             categoriesAdapter = CategoriesAdapter(it1)
                             Log.d("OKHTTP Categories", "TEST")
                             recyclerView.adapter = categoriesAdapter
@@ -53,6 +62,9 @@ class MainActivity : AppCompatActivity() {
 
             override fun onFailure(call: Call, e: IOException) {
                 e.localizedMessage?.let { Log.e("OKHTTP Categories", it) }
+                categoriesProgressIndicator.visibility = View.GONE
+                Snackbar.make(recyclerView, "Unable to load the categories, check your internet connection", Snackbar.LENGTH_LONG)
+                    .show()
             }
         })
     }

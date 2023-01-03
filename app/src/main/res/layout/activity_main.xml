@@ -27,4 +27,14 @@
         android:id="@+id/categories_recycler_view"
         android:layout_below="@id/categories_heading" />
 
+    <com.google.android.material.progressindicator.CircularProgressIndicator
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/categories_circular_progress"
+        android:layout_centerInParent="true"
+        app:trackColor="@color/primary"
+        app:indicatorColor="@color/teal_200"
+        android:indeterminate="true"
+        />
+
 </RelativeLayout>
