@@ -22,7 +22,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        recyclerView = findViewById(R.id.recycler_view)
+        recyclerView = findViewById(R.id.categories_recycler_view)
         getCategories()
     }
 
@@ -41,18 +41,18 @@ class MainActivity : AppCompatActivity() {
                     categoriesResponse?.categories?.let { it1 ->
                         runOnUiThread {
                             categoriesAdapter = CategoriesAdapter(it1)
-                            Log.d("OKHTTP", "TEST")
+                            Log.d("OKHTTP Categories", "TEST")
                             recyclerView.adapter = categoriesAdapter
                             recyclerView.layoutManager = LinearLayoutManager(applicationContext)
                         }
 
                     }
-                    Log.d("OKHTTP", "Got " + categoriesResponse?.categories?.count() + " results")
+                    Log.d("OKHTTP Categories", "Got " + categoriesResponse?.categories?.count() + " results")
                 }
             }
 
             override fun onFailure(call: Call, e: IOException) {
-                e.localizedMessage?.let { Log.e("OKHTTP", it) }
+                e.localizedMessage?.let { Log.e("OKHTTP Categories", it) }
             }
         })
     }
