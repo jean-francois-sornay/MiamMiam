@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    tools:context=".MealActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="8dp"
+            app:cardCornerRadius="10dp"
+            app:cardElevation="14dp">
+
+            <TextView
+                android:id="@+id/meal_heading"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_margin="5dp"
+                android:padding="4dp"
+                android:text="Meal Recipe"
+                android:textAlignment="center"
+                android:textAllCaps="true"
+                android:textSize="22sp"
+                android:textStyle="bold" />
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="8dp"
+            app:cardCornerRadius="10dp"
+            app:cardElevation="14dp">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:scaleType="centerCrop"
+                android:id="@+id/meal_image"
+                />
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="8dp"
+            app:cardCornerRadius="10dp"
+            app:cardElevation="14dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_margin="5dp"
+                    android:padding="4dp"
+                    android:text="Ingredients"
+                    android:textAlignment="center"
+                    android:textAllCaps="true"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="5dp"
+                    android:id="@+id/ingredients_recycler_view"/>
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="8dp"
+            app:cardCornerRadius="10dp"
+            app:cardElevation="14dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_margin="5dp"
+                    android:padding="4dp"
+                    android:text="Instructions"
+                    android:textAlignment="center"
+                    android:textAllCaps="true"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="5dp"
+                    android:id="@+id/instructions_recycler_view"/>
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="8dp"
+            app:cardCornerRadius="10dp"
+            app:cardElevation="14dp">
+
+            <TextView
+                android:id="@+id/meal_tutorial_link"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:gravity="center"
+                android:padding="4dp"
+                android:text="Meal Tutorial Link"
+                android:textAlignment="center"
+                android:textSize="12sp"
+                android:autoLink="web"
+                android:linksClickable="true"/>
+        </androidx.cardview.widget.CardView>
+    </LinearLayout>
+</ScrollView>
