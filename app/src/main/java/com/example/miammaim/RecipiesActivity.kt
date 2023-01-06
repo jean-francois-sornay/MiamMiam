@@ -56,7 +56,6 @@ class RecipiesActivity : AppCompatActivity() {
                             recipiesAdapter = RecipiesAdapter(it1)
                             recyclerView.adapter = recipiesAdapter
                         }
-
                     }
                     Log.d("OKHTTP Recipies", "Got " + recipiesResponse?.recipies?.count() + " results")
                 }

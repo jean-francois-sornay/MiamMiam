@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.Button
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.miammaim.adapter.CategoriesAdapter
@@ -27,8 +28,9 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         recyclerView = findViewById(R.id.categories_recycler_view)
-        categoriesProgressIndicator = findViewById(R.id.categories_circular_progress)
+        recyclerView.layoutManager = LinearLayoutManager(applicationContext)
 
+        categoriesProgressIndicator = findViewById(R.id.categories_circular_progress)
         categoriesProgressIndicator.visibility = View.VISIBLE;
 
         getCategories()
@@ -52,7 +54,6 @@ class MainActivity : AppCompatActivity() {
                             categoriesAdapter = CategoriesAdapter(it1)
                             Log.d("OKHTTP Categories", "TEST")
                             recyclerView.adapter = categoriesAdapter
-                            recyclerView.layoutManager = LinearLayoutManager(applicationContext)
                         }
 
                     }
