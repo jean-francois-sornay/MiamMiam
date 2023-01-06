@@ -7,6 +7,7 @@ import android.view.View
 import android.widget.Button
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.example.miammaim.adapter.CategoriesAdapter
 import com.example.miammaim.model.CategoriesResponse
 import com.google.android.material.progressindicator.CircularProgressIndicator
@@ -21,6 +22,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var recyclerView: RecyclerView
     private lateinit var categoriesAdapter: CategoriesAdapter
     private lateinit var categoriesProgressIndicator: CircularProgressIndicator
+    private lateinit var swipeRefreshLayout: SwipeRefreshLayout
 
     private var categoriesResponse: CategoriesResponse? = null
 
@@ -32,6 +34,13 @@ class MainActivity : AppCompatActivity() {
 
         categoriesProgressIndicator = findViewById(R.id.categories_circular_progress)
         categoriesProgressIndicator.visibility = View.VISIBLE;
+
+        swipeRefreshLayout = findViewById(R.id.swipe_refresh_layout)
+        swipeRefreshLayout.setOnRefreshListener {
+            swipeRefreshLayout.isRefreshing = false
+            getCategories()
+            Log.d("MiamMaim", "Categories refreshed")
+        }
 
         getCategories()
     }

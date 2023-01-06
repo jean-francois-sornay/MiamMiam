@@ -2,10 +2,11 @@ package com.example.miammaim.model
 
 import com.google.gson.annotations.SerializedName
 
-class RecipiesResponse {
+class RecipesResponse {
     @SerializedName("meals")
-    var recipies: List<Recipe>? = null
+    var recipes: List<Recipe>? = null
 }
+
 
 
 class Recipe {

@@ -1,16 +1,14 @@
 package com.example.miammaim.adapter
 
 import android.content.Intent
-import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.example.miammaim.MainActivity
 import com.example.miammaim.R
-import com.example.miammaim.RecipiesActivity
+import com.example.miammaim.RecipesActivity
 import com.example.miammaim.model.Categorie
 import com.squareup.picasso.Picasso
 
@@ -36,8 +34,8 @@ class CategoriesAdapter(val categories: List<Categorie>) : RecyclerView.Adapter<
             holder.itemView.animate().scaleX(1.1f).scaleY(1.1f).setDuration(200).withEndAction {
                 holder.itemView.animate().scaleX(1f).scaleY(1f).setDuration(200)
             }
-            // open a new activity with the list of recipies of the category
-            val intent = Intent(holder.itemView.context, RecipiesActivity::class.java)
+            // open a new activity with the list of recipes of the category
+            val intent = Intent(holder.itemView.context, RecipesActivity::class.java)
             intent.putExtra("categoryName", categories[position].name)
             holder.itemView.context.startActivity(intent)
         })
