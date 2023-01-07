@@ -1,15 +1,15 @@
 # Projet mobile MiamMiam
 # ====================
 
-# But du projet
+## But du projet
 Le but de ce projet est de créer une application mobile permettant de consommer l'API [TheMealDB](https://themealdb.com/)
 en utilisant le langage de programmation Kotlin. L'application doit permettre de consulter les recettes de cuisine, de
 consulter les détails d'une recette tout cela en passant d'une vue des différentes catégorie à une vue des recettes
 disponible pour cette catégorie pour arriver aux détails de la recette choisie.
 
-# Gestions de projet
+## Gestions de projet
 
-## Organisation du travail
+### Organisation du travail
 Comme vous pouvez le remarquer en analysant les commits de ce projet, nous avons mis longtemps à commencer
 à réellement travailler sur le projet. Cela est dû à deux choses :
 - Nous sommes également en binôme sur d'autres projets et avons pris la décision de ne pas commencer à coder
@@ -26,7 +26,7 @@ avons trouvé que cela permettait de mieux gérer le temps de travail et de mieu
 qu'elles étaient assez simples. De plus, pour un si petit projet, nous avons trouvé que cela permettait de
 travailler plus efficacement et de pouvoir avoir et comprendre plus rapidement les problématiques et enjeux de la conception mobile.
 
-## Détermination des tâches
+### Détermination des tâches
 Les tâches ont été déterminées et renseignées durant les premières séances en fonction des fonctionnalités de l'application. Chaque fonctionnalité a été découpée en 
 plusieurs tâches plus petites. Cette découpe a été faite en fonction de la complexité de la tâche et de la disponibilité
 des membres du groupe pour travailler sur le projet dans un commun accord.
@@ -35,7 +35,7 @@ Pour mieux nous aider à visualiser le travail à faire, nous avons dans un prem
 afin d'avoir un rendu visuel des différents écrans de l'application. Cela nous a permis de mieux nous organiser et de
 savoir ce que nous devions faire.
 
-## Gestion de version
+### Gestion de version
 Nous avons utilisé le logiciel Git pour gérer les différentes versions de notre projet. Nous avons créé un dépôt sur
 GitHub et nous avons travaillé sur des branches différentes pour chaque fonctionnalité.
 Nous avons utilisé le même principe que GitFlow pour gérer les branches. Nous avons donc une branche `master` qui
@@ -43,21 +43,23 @@ contient la version stable du projet et des branches `feature` qui contiennent l
 Nous avons également une branche `develop` qui contient la version en cours de développement.
 
 
-# Fonctionnalités implémentées
+## Fonctionnalités implémentées
 
-## Afficher la liste des catégories de recettes
+### Afficher la liste des catégories de recettes
 Pour la liste des catégories de recettes, nous avons choisi d'avoir un design simple et épuré. Nous avons donc choisi
 de n'afficher que le nom de la catégorie et une image de la catégorie. Nous y avons ajouté une courte description
 de la catégorie afin de donner un peu plus d'informations à l'utilisateur mais surtout de tester et montrer
 que nous avions compris le principe de structuration d'éléments de design (cardview, textview, imageview, etc.).
 
-## Afficher la liste des recettes d'une catégorie
+
+### Afficher la liste des recettes d'une catégorie
 Nous avons choisi d'afficher la liste des recettes d'une catégorie sur la même idée que la liste des catégories.
 Nous avons donc choisi d'afficher le nom de la recette et une image de la recette mais cette fois-ci nous avons
 choisi d'avoir un layout de type grid afin de pouvoir afficher plus d'éléments sur la même page et de mettre en avant
 les images des recettes.
 
-## Afficher les détails d'une recette
+
+### Afficher les détails d'une recette
 Les points importants à afficher dans cet écran sont :
  * Le nom de la recette
  * Une image de la recette
@@ -69,7 +71,8 @@ Nous avons donc choisi d'afficher ces informations dans un layout de type scroll
 toutes les informations de la recette. Nous avons également choisi d'afficher les ingrédients et les étapes dans
 des listes afin de pouvoir les afficher de manière plus lisible.
 
-## Afficher une recette aléatoire
+
+### Afficher une recette aléatoire
 
  * Depuis l'écran d'accueil (liste des catégories)
 Pour implémenter cette fonctionnalité, nous avons utilisé le endpoint `www.themealdb.com/api/json/v1/1/random.php` de l'API TheMealDB. 
@@ -83,7 +86,7 @@ Nous récupérons donc une recette aléatoire dans cette liste puis nous en tran
 les détails de cette recette.
 
 
-# Difficultés rencontrées
+## Difficultés rencontrées
 
  * La gestion des appels API (difficulté simple à résoudre)
 Nous avons eu quelques difficultés à gérer les appels API. En effet, nous avons eu du mal à comprendre comment
@@ -124,7 +127,7 @@ Les fonctionnalités suivantes que nous pensions ajouter au projet n'ont donc pa
  * Gestion d'une liste de recettes favorites
 
 
-# Apréciations sur le projet
+## Apréciations sur le projet
 
 Ce projet nous a permis de découvrir le langage Kotlin et de nous donner un bon aperçu de certaines problématiques de développement mobile
 comme par exemple la gestion d'API. Nous avons trouvé qu'il permettait vraiment de mieux se familiariser avec le développement mobile
@@ -132,7 +135,6 @@ et de mieux comprendre les enjeux de la conception mobile. Nous avons également
 de découvrir un nouveau langage de programmation et de découvrir une nouvelle façon de développer.
 
 
-# Auteurs
-# -------
-# - [Jean-François SORNAY](https://github.com/jean-francois-sornay/)
-# - [Thomas ALEXALINE](https://github.com/Megacruxis)
+## Auteurs
+ - [Jean-François SORNAY](https://github.com/jean-francois-sornay/)
+ - [Thomas ALEXALINE](https://github.com/Megacruxis)
