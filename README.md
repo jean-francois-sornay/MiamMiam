@@ -19,12 +19,7 @@ Comme vous pouvez le remarquer en analysant les commits de ce projet, nous avons
 - Nous avons eu du mal à nous mettre d'accord sur le design et les fonctionnalités prévus de l'application. Nous avons donc décidé de commencer
   par le design avant de commencer à coder.
 
-Un deuxième point que l'on peut potentiellement voir est le fait que nous avons choisi de travailler en pair
-programming. Nous avons choisi cette méthode car nous avons trouvé que cela permettait de mieux partager les
-connaissances et de mieux comprendre le code de l'autre. Nous avons également choisi cette méthode car nous
-avons trouvé que cela permettait de mieux gérer le temps de travail et de mieux répartir les tâches surtout 
-qu'elles étaient assez simples. De plus, pour un si petit projet, nous avons trouvé que cela permettait de
-travailler plus efficacement et de pouvoir avoir et comprendre plus rapidement les problématiques et enjeux de la conception mobile.
+Un deuxième point que l'on peut potentiellement voir est le fait que nous avons choisi de travailler en pair programming. Nous avons choisi cette méthode car nous avons trouvé que cela permettait de mieux partager les connaissances et de mieux comprendre le code de l'autre. Par ailleurs, nous avons trouvé que cette méthode permettait de mieux gérer le temps de travail et de mieux gérer le chemin critique. De plus, pour un si petit projet, nous avons trouvé que cela permettait de travailler plus efficacement (il était plus simple de trouver la solutions à nos différents problèmes) et de pouvoir comprendre plus rapidement les problématiques et enjeux de la conception mobile.
 
 ### Détermination des tâches
 Les tâches ont été déterminées et renseignées durant les premières séances en fonction des fonctionnalités de l'application. Chaque fonctionnalité a été découpée en 
