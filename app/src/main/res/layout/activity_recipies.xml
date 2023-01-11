@@ -25,13 +25,22 @@
         android:layout_height="match_parent"
         android:layout_below="@id/recipies_heading" />
 
+    <Button
+        android:id="@+id/random_recipe_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="16dp"
+        android:text="Random recipe" />
+
     <com.google.android.material.progressindicator.CircularProgressIndicator
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/recipies_circular_progress"
         android:layout_centerInParent="true"
-        app:trackColor="@color/primary"
-        app:indicatorColor="@color/teal_200"
+        app:trackColor="@color/secondary"
+        app:indicatorColor="@color/light_pink"
         android:indeterminate="true"
         />
 

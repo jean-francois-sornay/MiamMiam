@@ -23,6 +23,13 @@ class RecipeViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 class RecipiesAdapter(val recipies: List<Recipe>) : RecyclerView.Adapter<RecipeViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecipeViewHolder {
         val itemView = LayoutInflater.from(parent.context).inflate(R.layout.recipe_item, parent, false)
+        var randomRecipeButton: Button = (parent.context as Activity).findViewById(R.id.random_recipe_button)
+        randomRecipeButton.setOnClickListener { view ->
+            val intent = Intent(parent.context, MealActivity::class.java)
+            val randomRecipe = recipies.random()
+            intent.putExtra("mealId", randomRecipe.id)
+            parent.context.startActivity(intent)
+        }
         return RecipeViewHolder(itemView)
     }
 

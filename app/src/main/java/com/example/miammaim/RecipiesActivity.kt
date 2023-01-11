@@ -63,7 +63,7 @@ class RecipiesActivity : AppCompatActivity() {
 
             override fun onFailure(call: Call, e: IOException) {
                 e.localizedMessage?.let { Log.e("OKHTTP Recipies", it) }
-                recipiesProgressIndicator.visibility = View.VISIBLE
+                recipiesProgressIndicator.visibility = View.GONE
                 Snackbar.make(recyclerView,
                     "Unable to load the recipies of $categoryName category, check your internet connection", Snackbar.LENGTH_LONG)
                     .show()

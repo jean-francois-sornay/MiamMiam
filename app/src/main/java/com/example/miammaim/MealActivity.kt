@@ -29,6 +29,7 @@ class MealActivity  : AppCompatActivity() {
 
     private var mealId by Delegates.notNull<Int>()
     private var meal: Meal? = null
+    private var isRandom: Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,6 +40,7 @@ class MealActivity  : AppCompatActivity() {
 
         val bundle = intent.extras
         mealId = bundle!!.getInt("mealId")
+        isRandom = bundle.getBoolean("isRandom")
 
         ingredientRecyclerView = findViewById(R.id.ingredients_recycler_view)
         ingredientRecyclerView.layoutManager = GridLayoutManager(this, 3)
@@ -50,6 +52,11 @@ class MealActivity  : AppCompatActivity() {
 
     public fun getMeal() {
         var url = URL("https://www.themealdb.com/api/json/v1/1/lookup.php?i=" + mealId)
+
+        if (isRandom) {
+            url = URL("https://www.themealdb.com/api/json/v1/1/random.php")
+        }
+
         Log.d("OKHTTP Meal", "Got URL " + url)
         val request = Request.Builder()
             .url(url)
