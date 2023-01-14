@@ -52,6 +52,9 @@ class MealActivity  : AppCompatActivity() {
         mealId = bundle!!.getInt("mealId")
         isRandom = bundle.getBoolean("isRandom")
 
+        val actionBar = supportActionBar
+        actionBar!!.setDisplayHomeAsUpEnabled(true)
+
         mealProgressIndicator = findViewById(R.id.meal_circular_progress)
         imageCardView = findViewById(R.id.meal_image_card_view)
         mealTitleCardView = findViewById(R.id.meal_title_card_view)
@@ -66,6 +69,11 @@ class MealActivity  : AppCompatActivity() {
         instructionRecyclerView = findViewById(R.id.instructions_recycler_view)
         instructionRecyclerView.layoutManager = LinearLayoutManager(this)
         getMeal()
+    }
+
+    override fun onSupportNavigateUp(): Boolean {
+        onBackPressed()
+        return true
     }
 
     public fun setInitialVisibility() {

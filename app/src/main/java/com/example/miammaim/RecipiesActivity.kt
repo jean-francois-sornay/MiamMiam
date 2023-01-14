@@ -26,16 +26,25 @@ class RecipiesActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_recipies)
-        recipiesProgressIndicator = findViewById(R.id.recipies_circular_progress)
 
+        recipiesProgressIndicator = findViewById(R.id.recipies_circular_progress)
         recipiesProgressIndicator.visibility = View.VISIBLE
+
         val bundle = intent.extras
         categoryName = bundle!!.getString("categoryName")
+
+        val actionBar = supportActionBar
+        actionBar!!.setDisplayHomeAsUpEnabled(true)
 
         val layoutManager = GridLayoutManager(this, 2)
         recyclerView = findViewById(R.id.recipies_recycler_view)
         recyclerView.layoutManager = layoutManager
         getRecipies()
+    }
+
+    override fun onSupportNavigateUp(): Boolean {
+        onBackPressed()
+        return true
     }
 
     public fun getRecipies() {
