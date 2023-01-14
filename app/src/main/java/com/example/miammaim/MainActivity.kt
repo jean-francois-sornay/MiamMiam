@@ -67,6 +67,11 @@ class MainActivity : AppCompatActivity() {
 
                     }
                     Log.d("OKHTTP Categories", "Got " + categoriesResponse?.categories?.count() + " results")
+                    if(categoriesResponse?.categories?.isEmpty() == true) {
+                        Snackbar.make(recyclerView,
+                            "No category found, check the app later", Snackbar.LENGTH_LONG)
+                            .show()
+                    }
                 }
             }
 

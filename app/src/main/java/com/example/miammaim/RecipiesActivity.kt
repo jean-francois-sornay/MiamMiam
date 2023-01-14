@@ -58,6 +58,11 @@ class RecipiesActivity : AppCompatActivity() {
                         }
                     }
                     Log.d("OKHTTP Recipies", "Got " + recipiesResponse?.recipies?.count() + " results")
+                    if(recipiesResponse?.recipies?.isEmpty() == true) {
+                        Snackbar.make(recyclerView,
+                            "No recipes found for the $categoryName category", Snackbar.LENGTH_LONG)
+                            .show()
+                    }
                 }
             }
 
@@ -65,7 +70,7 @@ class RecipiesActivity : AppCompatActivity() {
                 e.localizedMessage?.let { Log.e("OKHTTP Recipies", it) }
                 recipiesProgressIndicator.visibility = View.GONE
                 Snackbar.make(recyclerView,
-                    "Unable to load the recipies of $categoryName category, check your internet connection", Snackbar.LENGTH_LONG)
+                    "Unable to load the recipes of $categoryName category, check your internet connection", Snackbar.LENGTH_LONG)
                     .show()
             }
         })

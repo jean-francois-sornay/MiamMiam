@@ -2,14 +2,18 @@ package com.example.miammaim
 
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.miammaim.adapter.*
 import com.example.miammaim.model.*
+import com.google.android.material.progressindicator.CircularProgressIndicator
+import com.google.android.material.snackbar.Snackbar
 import com.google.gson.Gson
 import com.squareup.picasso.Picasso
 import okhttp3.*
@@ -18,10 +22,16 @@ import java.net.URL
 import kotlin.properties.Delegates
 
 class MealActivity  : AppCompatActivity() {
+    private lateinit var mealTitleCardView: CardView
+    private lateinit var ingredientsCardView: CardView
+    private lateinit var instructionsCardView: CardView
+    private lateinit var tutorialCardView: CardView
+    private lateinit var imageCardView: CardView
     private lateinit var ingredientAdapter: IngredientAdapter
     private lateinit var instructionAdapter: InstructionAdapter
     private lateinit var ingredientRecyclerView: RecyclerView
     private lateinit var instructionRecyclerView: RecyclerView
+    private lateinit var mealProgressIndicator: CircularProgressIndicator
 
     public lateinit var headerTextView: TextView
     public lateinit var imgView: ImageView
@@ -42,12 +52,38 @@ class MealActivity  : AppCompatActivity() {
         mealId = bundle!!.getInt("mealId")
         isRandom = bundle.getBoolean("isRandom")
 
+        mealProgressIndicator = findViewById(R.id.meal_circular_progress)
+        imageCardView = findViewById(R.id.meal_image_card_view)
+        mealTitleCardView = findViewById(R.id.meal_title_card_view)
+        ingredientsCardView = findViewById(R.id.meal_ingredients_card_view)
+        instructionsCardView = findViewById(R.id.meal_instructions_card_view)
+        tutorialCardView = findViewById(R.id.meal_tutorial_card_view)
+        setInitialVisibility()
+
         ingredientRecyclerView = findViewById(R.id.ingredients_recycler_view)
         ingredientRecyclerView.layoutManager = GridLayoutManager(this, 3)
 
         instructionRecyclerView = findViewById(R.id.instructions_recycler_view)
         instructionRecyclerView.layoutManager = LinearLayoutManager(this)
         getMeal()
+    }
+
+    public fun setInitialVisibility() {
+        mealProgressIndicator.visibility = View.VISIBLE
+        imageCardView.visibility = View.GONE
+        mealTitleCardView.visibility = View.GONE
+        ingredientsCardView.visibility = View.GONE
+        instructionsCardView.visibility = View.GONE
+        tutorialCardView.visibility = View.GONE
+    }
+
+    public fun setSuccessLoadingVisibility() {
+        mealProgressIndicator.visibility = View.GONE
+        imageCardView.visibility = View.VISIBLE
+        mealTitleCardView.visibility = View.VISIBLE
+        ingredientsCardView.visibility = View.VISIBLE
+        instructionsCardView.visibility = View.VISIBLE
+        tutorialCardView.visibility = View.VISIBLE
     }
 
     public fun getMeal() {
@@ -71,6 +107,7 @@ class MealActivity  : AppCompatActivity() {
                         meal = Meal(mealsResponse.meals!![0])
 
                         runOnUiThread {
+                            setSuccessLoadingVisibility()
                             headerTextView.text = meal!!.name
                             Picasso.get().load(meal!!.imgLink).into(imgView)
                              //meal!!.instructions?.joinToString { it + "\r\n" } ?: "No instructions"
@@ -90,6 +127,10 @@ class MealActivity  : AppCompatActivity() {
 
             override fun onFailure(call: Call, e: IOException) {
                 e.localizedMessage?.let { Log.e("OKHTTP Meal", it) }
+                mealProgressIndicator.visibility = View.GONE
+                Snackbar.make(mealTitleCardView,
+                    "Unable to load the selected recipe, check your internet connection", Snackbar.LENGTH_LONG)
+                    .show()
             }
         })
     }

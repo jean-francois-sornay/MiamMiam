@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">MiamMaim</string>
+    <string name="meal_activity_title">Meal Recipe</string>
+    <string name="meal_activity_ingredients_subtitle">Ingredients</string>
+    <string name="meal_activity_tutorial_subtitle">Meal Tutorial Link</string>
+    <string name="meal_activity_instructions_subtitle">Instructions</string>
 </resources>
