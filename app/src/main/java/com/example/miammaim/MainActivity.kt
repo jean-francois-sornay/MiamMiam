@@ -1,5 +1,6 @@
 package com.example.miammaim
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -23,6 +24,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var categoriesAdapter: CategoriesAdapter
     private lateinit var categoriesProgressIndicator: CircularProgressIndicator
     private lateinit var swipeRefreshLayout: SwipeRefreshLayout
+    private lateinit var randomRecipeButton: Button
 
     private var categoriesResponse: CategoriesResponse? = null
 
@@ -33,7 +35,14 @@ class MainActivity : AppCompatActivity() {
         recyclerView.layoutManager = LinearLayoutManager(applicationContext)
 
         categoriesProgressIndicator = findViewById(R.id.categories_circular_progress)
-        categoriesProgressIndicator.visibility = View.VISIBLE;
+        categoriesProgressIndicator.visibility = View.VISIBLE
+
+        randomRecipeButton = findViewById(R.id.random_recipe_button)
+        randomRecipeButton.setOnClickListener {
+            val intent = Intent(this, MealActivity::class.java)
+            intent.putExtra("isRandom", true)
+            this.startActivity(intent)
+        }
 
         swipeRefreshLayout = findViewById(R.id.swipe_refresh_layout)
         swipeRefreshLayout.setOnRefreshListener {
@@ -67,6 +76,11 @@ class MainActivity : AppCompatActivity() {
 
                     }
                     Log.d("OKHTTP Categories", "Got " + categoriesResponse?.categories?.count() + " results")
+                    if(categoriesResponse?.categories?.isEmpty() == true) {
+                        Snackbar.make(recyclerView,
+                            "No category found, check the app later", Snackbar.LENGTH_LONG)
+                            .show()
+                    }
                 }
             }
 

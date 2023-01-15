@@ -1,3 +1,12 @@
 <resources>
     <string name="app_name">MiamMaim</string>
+    <string name="categories_activity_title">List of categories</string>
+    <string name="random_recipe_button">Random recipe</string>
+    <string name="image_loading">Loading …</string>
+    <string name="lacking_information">Information not found</string>
+    <string name="recipes_activity_title">List of recipes</string>
+    <string name="meal_activity_title">Meal Recipe</string>
+    <string name="meal_activity_ingredients_subtitle">Ingredients</string>
+    <string name="meal_activity_tutorial_subtitle">Meal Tutorial Link</string>
+    <string name="meal_activity_instructions_subtitle">Instructions</string>
 </resources>

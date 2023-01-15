@@ -1,9 +1,11 @@
 package com.example.miammaim.adapter
 
+import android.app.Activity
 import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
@@ -21,6 +23,13 @@ class RecipeViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 class RecipesAdapter(private val recipes: List<Recipe>) : RecyclerView.Adapter<RecipeViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecipeViewHolder {
         val itemView = LayoutInflater.from(parent.context).inflate(R.layout.recipe_item, parent, false)
+        var randomRecipeButton: Button = (parent.context as Activity).findViewById(R.id.random_recipe_button)
+        randomRecipeButton.setOnClickListener { view ->
+            val intent = Intent(parent.context, MealActivity::class.java)
+            val randomRecipe = recipes.random()
+            intent.putExtra("mealId", randomRecipe.id)
+            parent.context.startActivity(intent)
+        }
         return RecipeViewHolder(itemView)
     }
 

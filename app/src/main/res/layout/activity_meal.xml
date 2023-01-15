@@ -11,7 +11,18 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
+        <com.google.android.material.progressindicator.CircularProgressIndicator
+            android:id="@+id/meal_circular_progress"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            app:trackColor="@color/secondary"
+            app:indicatorColor="@color/light_pink"
+            android:indeterminate="true"
+            />
+
         <androidx.cardview.widget.CardView
+            android:id="@+id/meal_title_card_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -26,7 +37,7 @@
                 android:layout_gravity="center"
                 android:layout_margin="5dp"
                 android:padding="4dp"
-                android:text="Meal Recipe"
+                android:text="@string/meal_activity_title"
                 android:textAlignment="center"
                 android:textAllCaps="true"
                 android:textSize="22sp"
@@ -34,6 +45,7 @@
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
+            android:id="@+id/meal_image_card_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -46,10 +58,11 @@
                 android:layout_height="wrap_content"
                 android:scaleType="centerCrop"
                 android:id="@+id/meal_image"
-                />
+                android:contentDescription="Meal's image" />
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
+            android:id="@+id/meal_ingredients_card_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -68,7 +81,7 @@
                     android:layout_gravity="center"
                     android:layout_margin="5dp"
                     android:padding="4dp"
-                    android:text="Ingredients"
+                    android:text="@string/meal_activity_ingredients_subtitle"
                     android:textAlignment="center"
                     android:textAllCaps="true"
                     android:textSize="16sp"
@@ -83,6 +96,7 @@
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
+            android:id="@+id/meal_instructions_card_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -101,7 +115,7 @@
                     android:layout_gravity="center"
                     android:layout_margin="5dp"
                     android:padding="4dp"
-                    android:text="Instructions"
+                    android:text="@string/meal_activity_instructions_subtitle"
                     android:textAlignment="center"
                     android:textAllCaps="true"
                     android:textSize="16sp"
@@ -109,13 +123,14 @@
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
                     android:id="@+id/instructions_recycler_view"/>
             </LinearLayout>
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
+            android:id="@+id/meal_tutorial_card_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -130,7 +145,7 @@
                 android:layout_margin="8dp"
                 android:gravity="center"
                 android:padding="4dp"
-                android:text="Meal Tutorial Link"
+                android:text="@string/meal_activity_tutorial_subtitle"
                 android:textAlignment="center"
                 android:textSize="12sp"
                 android:autoLink="web"

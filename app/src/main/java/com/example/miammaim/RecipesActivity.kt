@@ -28,9 +28,10 @@ class RecipesActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_recipes)
-        recipesProgressIndicator = findViewById(R.id.recipes_circular_progress)
 
+        recipesProgressIndicator = findViewById(R.id.recipes_circular_progress)
         recipesProgressIndicator.visibility = View.VISIBLE
+
         val bundle = intent.extras
         categoryName = bundle!!.getString("categoryName")
 
@@ -38,6 +39,8 @@ class RecipesActivity : AppCompatActivity() {
         recyclerView = findViewById(R.id.recipes_recycler_view)
         recyclerView.layoutManager = layoutManager
 
+        val actionBar = supportActionBar
+        actionBar!!.setDisplayHomeAsUpEnabled(true)
 
         swipeRefreshLayout = findViewById(R.id.swipe_refresh_layout)
         swipeRefreshLayout.setOnRefreshListener {
@@ -46,6 +49,11 @@ class RecipesActivity : AppCompatActivity() {
             Log.d("MiamMaim", "Recipes refreshed")
         }
         getRecipes()
+    }
+
+    override fun onSupportNavigateUp(): Boolean {
+        onBackPressed()
+        return true
     }
 
     public fun getRecipes() {
@@ -68,12 +76,17 @@ class RecipesActivity : AppCompatActivity() {
                         }
                     }
                     Log.d("OKHTTP Recipes", "Got " + recipesResponse?.recipes?.count() + " results")
+                    if(recipesResponse?.recipes?.isEmpty() == true) {
+                        Snackbar.make(recyclerView,
+                            "No recipes found for the $categoryName category", Snackbar.LENGTH_LONG)
+                            .show()
+                    }
                 }
             }
 
             override fun onFailure(call: Call, e: IOException) {
                 e.localizedMessage?.let { Log.e("OKHTTP Recipes", it) }
-                recipesProgressIndicator.visibility = View.VISIBLE
+                recipesProgressIndicator.visibility = View.GONE
                 Snackbar.make(recyclerView,
                     "Unable to load the recipes of $categoryName category, check your internet connection", Snackbar.LENGTH_LONG)
                     .show()
