@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.example.miammaim.adapter.RecipesAdapter
+import com.example.miammaim.model.Recipe
 import com.example.miammaim.model.RecipesResponse
 import com.google.android.material.progressindicator.CircularProgressIndicator
 import com.google.android.material.snackbar.Snackbar
@@ -46,9 +47,11 @@ class RecipesActivity : AppCompatActivity() {
         swipeRefreshLayout.setOnRefreshListener {
             swipeRefreshLayout.isRefreshing = false
             getRecipes()
-            Log.d("MiamMaim", "Recipes refreshed")
+            Log.d("Recipes", "Recipes refreshed")
         }
+
         getRecipes()
+        Log.d("Recipes", "Recipes view loaded")
     }
 
     override fun onSupportNavigateUp(): Boolean {
@@ -70,12 +73,10 @@ class RecipesActivity : AppCompatActivity() {
                     recipesResponse = parseRecipesResponse(it)
                     recipesResponse?.recipes?.let { it1 ->
                         runOnUiThread {
-                            recipesProgressIndicator.visibility = View.GONE
-                            recipesAdapter = RecipesAdapter(it1)
-                            recyclerView.adapter = recipesAdapter
+                            setViewContentOnUi(it1)
                         }
                     }
-                    Log.d("OKHTTP Recipes", "Got " + recipesResponse?.recipes?.count() + " results")
+                    Log.d("OKHTTP Recipes", "Found " + recipesResponse?.recipes?.count() + " recipes for this category")
                     if(recipesResponse?.recipes?.isEmpty() == true) {
                         Snackbar.make(recyclerView,
                             "No recipes found for the $categoryName category", Snackbar.LENGTH_LONG)
@@ -85,13 +86,19 @@ class RecipesActivity : AppCompatActivity() {
             }
 
             override fun onFailure(call: Call, e: IOException) {
-                e.localizedMessage?.let { Log.e("OKHTTP Recipes", it) }
+                e.localizedMessage?.let { Log.e("OKHTTP Recipes Error", it) }
                 recipesProgressIndicator.visibility = View.GONE
                 Snackbar.make(recyclerView,
                     "Unable to load the recipes of $categoryName category, check your internet connection", Snackbar.LENGTH_LONG)
                     .show()
             }
         })
+    }
+
+    private fun setViewContentOnUi(recipes: List<Recipe>) {
+        recipesProgressIndicator.visibility = View.GONE
+        recipesAdapter = RecipesAdapter(recipes)
+        recyclerView.adapter = recipesAdapter
     }
 
     private fun parseRecipesResponse(json: String): RecipesResponse? {

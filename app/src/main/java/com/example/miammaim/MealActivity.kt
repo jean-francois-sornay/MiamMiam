@@ -68,7 +68,9 @@ class MealActivity  : AppCompatActivity() {
 
         instructionRecyclerView = findViewById(R.id.instructions_recycler_view)
         instructionRecyclerView.layoutManager = LinearLayoutManager(this)
+
         getMeal()
+        Log.d("Meal", "Meal view loaded")
     }
 
     override fun onSupportNavigateUp(): Boolean {
@@ -115,32 +117,34 @@ class MealActivity  : AppCompatActivity() {
                         meal = Meal(mealsResponse.meals!![0])
 
                         runOnUiThread {
-                            setSuccessLoadingVisibility()
-                            headerTextView.text = meal!!.name
-                            Picasso.get().load(meal!!.imgLink).into(imgView)
-                             //meal!!.instructions?.joinToString { it + "\r\n" } ?: "No instructions"
-                            linkTextView.text = meal!!.tutorial
-                            Log.d("OKHTTP Meal", "Got " + meal!!.instructions?.joinToString { it + "\r\n" })
-
-                            ingredientAdapter = IngredientAdapter(meal!!.ingredients)
-                            ingredientRecyclerView.adapter = ingredientAdapter
-
-                            instructionAdapter = InstructionAdapter(meal!!.instructions!!)
-                            instructionRecyclerView.adapter = instructionAdapter
+                            setViewContentOnUi(meal!!)
                         }
                     }
-                    Log.d("OKHTTP Meal", "Got " + mealsResponse?.meals?.count() + " meals")
+                    Log.d("OKHTTP Meal", "Successfully retrieved " + (mealsResponse?.meals?.get(0)?.name ?: "") + " meal")
                 }
             }
 
             override fun onFailure(call: Call, e: IOException) {
-                e.localizedMessage?.let { Log.e("OKHTTP Meal", it) }
+                e.localizedMessage?.let { Log.e("OKHTTP Meal Error", it) }
                 mealProgressIndicator.visibility = View.GONE
                 Snackbar.make(mealTitleCardView,
                     "Unable to load the selected recipe, check your internet connection", Snackbar.LENGTH_LONG)
                     .show()
             }
         })
+    }
+
+    private fun setViewContentOnUi(meal: Meal) {
+        setSuccessLoadingVisibility()
+        headerTextView.text = meal.name
+        Picasso.get().load(meal.imgLink).into(imgView)
+        linkTextView.text = meal.tutorial
+
+        ingredientAdapter = IngredientAdapter(meal.ingredients)
+        ingredientRecyclerView.adapter = ingredientAdapter
+
+        instructionAdapter = InstructionAdapter(meal.instructions)
+        instructionRecyclerView.adapter = instructionAdapter
     }
 
     private fun parseMealsResponse(json: String): MealsResponse? {

@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.example.miammaim.adapter.CategoriesAdapter
+import com.example.miammaim.model.Categorie
 import com.example.miammaim.model.CategoriesResponse
 import com.google.android.material.progressindicator.CircularProgressIndicator
 import com.google.android.material.snackbar.Snackbar
@@ -48,10 +49,11 @@ class MainActivity : AppCompatActivity() {
         swipeRefreshLayout.setOnRefreshListener {
             swipeRefreshLayout.isRefreshing = false
             getCategories()
-            Log.d("MiamMaim", "Categories refreshed")
+            Log.d("Categories", "Categories refreshed")
         }
 
         getCategories()
+        Log.d("Categories", "Categories view loaded")
     }
 
     public fun getCategories() {
@@ -68,14 +70,11 @@ class MainActivity : AppCompatActivity() {
                     categoriesResponse = parseCategoriesResponse(it)
                     categoriesResponse?.categories?.let { it1 ->
                         runOnUiThread {
-                            categoriesProgressIndicator.visibility = View.GONE
-                            categoriesAdapter = CategoriesAdapter(it1)
-                            Log.d("OKHTTP Categories", "TEST")
-                            recyclerView.adapter = categoriesAdapter
+                            setViewContentOnUi(it1)
                         }
 
                     }
-                    Log.d("OKHTTP Categories", "Got " + categoriesResponse?.categories?.count() + " results")
+                    Log.d("OKHTTP Categories", "Found " + categoriesResponse?.categories?.count() + " existing categories")
                     if(categoriesResponse?.categories?.isEmpty() == true) {
                         Snackbar.make(recyclerView,
                             "No category found, check the app later", Snackbar.LENGTH_LONG)
@@ -85,12 +84,18 @@ class MainActivity : AppCompatActivity() {
             }
 
             override fun onFailure(call: Call, e: IOException) {
-                e.localizedMessage?.let { Log.e("OKHTTP Categories", it) }
+                e.localizedMessage?.let { Log.e("OKHTTP Categories Error", it) }
                 categoriesProgressIndicator.visibility = View.GONE
                 Snackbar.make(recyclerView, "Unable to load the categories, check your internet connection", Snackbar.LENGTH_LONG)
                     .show()
             }
         })
+    }
+
+    private fun setViewContentOnUi(categories: List<Categorie>) {
+        categoriesProgressIndicator.visibility = View.GONE
+        categoriesAdapter = CategoriesAdapter(categories)
+        recyclerView.adapter = categoriesAdapter
     }
 
     private fun parseCategoriesResponse(json: String): CategoriesResponse? {
